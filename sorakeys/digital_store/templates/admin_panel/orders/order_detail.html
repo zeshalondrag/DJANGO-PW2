@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Заказ #{{ order.id }} - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .detail { max-width: 600px; margin: 20px auto; }
+    .detail p { margin-bottom: 10px; }
+    .items-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .items-table th, .items-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    .items-table th { background-color: #f2f2f2; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+</style>
+<body>
+<h1>Заказ #{{ order.id }}</h2>
+<div class="details">
+    <p><strong>Пользователь:</strong> {{ order.user.username }}</p>
+    <p><strong>Общая стоимость:</strong> {{ order.total_price }} руб.</p>
+    <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+    <p><strong>Дата создания:</strong> {{ order.created_at }}</p>
+    <p><strong>Дата обновления:</strong> {{ order.updated_at }}</p>
+    <h3>Элементы заказа</h3>
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }} руб.</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Элементы отсутствуют</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a href="{% url 'order_list_view' %}" class="back-link">Вернуться к списку</a> | <a href="{% url 'admin_panel_view' %}" class="back-link">В панель администратора</a>
+</body>
+{% endblock %}

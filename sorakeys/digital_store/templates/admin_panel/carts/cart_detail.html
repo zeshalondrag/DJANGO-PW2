@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Корзина: {{ cart.user.username }} - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .detail { max-width: 600px; margin: 20px auto; }
+    .detail p { margin: 10px 0; }
+    .items-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .items-table th, .items-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    .items-table th { background-color: #f2f2f2; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+</style>
+<h1>Корзина {{ cart.user.username }}</h1>
+<div class="detail">
+    <p><strong>Пользователь:</strong> {{ cart.user.username }}</p>
+    <p><strong>Дата создания:</strong> {{ cart.created_at }}</p>
+    <p><strong>Дата обновления:</strong> {{ cart.updated_at }}</p>
+    <h3>Элементы корзины</h3>
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">Элементы отсутствуют</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a href="{% url 'cart_list_view' %}" class="back-link">Вернуться к списку</а> | <a href="{% url 'admin_panel_view' %}" class="back-link">В панель администратора</a>
+{% endblock %}

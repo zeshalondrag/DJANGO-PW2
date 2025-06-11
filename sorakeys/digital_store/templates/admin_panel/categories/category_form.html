@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{% if form.instance.pk %}Изменить категорию{% else %}Добавить категорию{% endif %} - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .form-container { max-width: 600px; margin: 20px auto; }
+    .form-container form { display: flex; flex-direction: column; gap: 10px; }
+    .form-container label { font-weight: bold; }
+    .form-container input, .form-container textarea, .form-container select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    .form-container button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .form-container button:hover { background-color: #0056b3; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+</style>
+<h1>{% if form.instance.pk %}Изменить категорию{% else %}Добавить категорию{% endif %}</h1>
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+<a href="{% url 'category_list_view' %}" class="back-link">Вернуться к списку</a> | <a href="{% url 'admin_panel_view' %}" class="back-link">В панель администратора</a>
+{% endblock %}

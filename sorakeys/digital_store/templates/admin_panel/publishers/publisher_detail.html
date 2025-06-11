@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Издатель: {{ publisher.name }} - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .detail { max-width: 600px; margin: 20px auto; }
+    .detail p { margin: 10px 0; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+</style>
+<h1>{{ publisher.name }}</h1>
+<div class="detail">
+    <p><strong>Описание:</strong> {{ publisher.description|default:'Нет описания' }}</p>
+    <p><strong>Веб-сайт:</strong> {% if publisher.website %}<a href="{{ publisher.website }}" target="_blank">{{ publisher.website }}</a>{% else %}Нет{% endif %}</p>
+</div>
+<a href="{% url 'publisher_list_view' %}" class="back-link">Вернуться к списку</a> | <a href="{% url 'admin_panel_view' %}">Вернуться в панель администратора</a>
+{% endblock %}

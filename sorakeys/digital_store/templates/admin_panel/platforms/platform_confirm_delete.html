@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Удалить платформу - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .confirm { max-width: 600px; margin: 20px auto; }
+    .confirm form { margin: 20px 0; }
+    .confirm button { padding: 10px 15px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .confirm button:hover { background-color: #c82333; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    h1 { text-align: center; }
+</style>
+<h1>Удалить платформу</h1>
+<div class="confirm">
+    <p>Вы уверены, что хотите удалить платформу "{{ object.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+</div>
+<a href="{% url 'platform_list_view' %}">Отмена</a> | <a href="{% url 'admin_panel_view' %}">В панель администратора</a>
+{% endblock %}

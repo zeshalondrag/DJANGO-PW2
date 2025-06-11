@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SORAKEYS{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px; 
+        }
+        
+        header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .logo a {
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .nav-button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            height: 48px; 
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .nav-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        .nav-button img {
+            width: 24px;
+            height: 24px;
+            filter: invert(100%);
+        }
+        .search-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 8px;
+            height: 48px;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        .search-bar:focus-within {
+            border-color: #2980b9;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            font-size: 18px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .search-bar input::placeholder {
+            color: #888;
+        }
+        .search-bar img {
+            width: 24px;
+            height: 24px;
+            filter: invert(50%);
+        }
+        .login-button {
+            background-color: #d3d3d3;
+            color: black;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        .login-button:hover {
+            background-color: #c0c0c0;
+        }
+        footer {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 40px 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .footer-column a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+        .footer-divider {
+            height: 2px;
+            background-color: #d3d3d3;
+            margin: 20px auto;
+            width: calc(100% - 700px); 
+        }
+        .social-media {
+            justify-content: center;
+            gap: 15px;
+            display: flex;
+        }
+        .social-media img {
+            width: 32px;
+            height: 32px;
+            filter: invert(50%);
+            transition: transform 0.2s ease;
+        }
+        .social-media img:hover {
+            transform: scale(1.1);
+        }
+        .footer-bottom {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        .footer-bottom p {
+            margin: 10px 0;
+        }
+        main {
+            min-height: calc(100vh - 300px);
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="{% url 'home_view' %}">SORAKEYS</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="{% url 'catalog_view' %}" class="nav-button">
+                    <img src="https://img.icons8.com/ios-filled/50/menu--v1.png" alt="Menu Icon"> Каталог
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск по товарам">
+                    <img src="https://img.icons8.com/ios-filled/50/search.png" alt="Search Icon">
+                </div>
+                <a href="{% url 'cart_view' %}" class="nav-button">
+                    <img src="https://img.icons8.com/ios-filled/50/shopping-cart.png" alt="Cart Icon"> Корзина
+                </a>
+                <a href="{% url 'login_view' %}" class="login-button">Войти</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>Партнёрам</h3>
+                <a href="#">API</a>
+                <a href="#">Стать продавцом на GGSel</a>
+                <a href="#">Партнерская программа</a>
+                <a href="#">Публичная оферта для продавцов</a>
+                <a href="#">Правила для Продавца</a>
+                <a href="#">Автоматическое B2B решение</a>
+            </div>
+            <div class="footer-column">
+                <h3>Покупателям</h3>
+                <a href="#">Часто задаваемые вопросы</a>
+                <a href="#">Публичная оферта для покупателей</a>
+                <a href="#">Политика возврата средств</a>
+            </div>
+            <div class="footer-column">
+                <h3>SORAKEYS</h3>
+                <a href="{% url 'contacts_view' %}">Контакты</a>
+                <a href="#">Отзывы</a>
+                <a href="#">Политика конфиденциальности</a>
+                <a href="{% url 'find_us_view' %}">Как нас найти</a>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="container social-media">
+            <a href="https://vk.com/sorakeys"><img src="https://img.icons8.com/ios-filled/50/vk-com.png" alt="VK"></a>
+            <a href="https://facebook.com/sorakeys"><img src="https://img.icons8.com/ios-filled/50/facebook-new.png" alt="Facebook"></a>
+            <a href="https://t.me/sorakeys"><img src="https://img.icons8.com/ios-filled/50/telegram-app.png" alt="Telegram"></a>
+            <a href="https://instagram.com/sorakeys"><img src="https://img.icons8.com/ios-filled/50/instagram-new.png" alt="Instagram"></a>
+            <a href="https://youtube.com/sorakeys"><img src="https://img.icons8.com/ios-filled/50/youtube-play.png" alt="YouTube"></a>
+            <a href="https://tiktok.com/@sorakeys"><img src="https://img.icons8.com/ios-filled/50/tiktok.png" alt="TikTok"></a>
+            <a href="https://store.steampowered.com"><img src="https://img.icons8.com/ios-filled/50/steam.png" alt="Steam"></a>
+            <a href="https://discord.gg/sorakeys"><img src="https://img.icons8.com/ios-filled/50/discord-logo.png" alt="Discord"></a>
+        </div>
+        <div class="container footer-bottom">
+            <p>@2025 - SORAKEYS. Все права защищены.</p>
+            <p>Поддержка: <a href="mailto:support@sorakeys.net">support@sorakeys.net</a></p>
+        </div>
+    </footer>
+</body>
+</html>

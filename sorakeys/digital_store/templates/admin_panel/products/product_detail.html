@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Товар: {{ product.name }} - SORAKEYS{% endblock %}
+{% block content %}
+<style>
+    .detail img { max-width: 200px; height: auto; margin: 10px 0; }
+    .detail p { margin: 10px 0; }
+    .back-link { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }
+</style>
+<h1>{{ product.name }}</h1>
+<div class="detail">
+    <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+    <p><strong>Описание:</strong> {{ product.description|default:'Нет описания' }}</p>
+    <p><strong>Фото:</strong> {% if product.photo %}<img src="{{ product.photo.url }}" alt="{{ product.name }}">{% else %}Нет{% endif %}</p>
+    <p><strong>В наличии:</strong> {{ product.stock }}</p>
+    <p><strong>Категория:</strong> {{ product.category.name }}</p>
+    <p><strong>Издатель:</strong> {{ product.publisher.name }}</p>
+    <p><strong>Платформы:</strong> {% for platform in product.platforms.all %}{{ platform.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p><strong>Скидка:</strong> {{ product.discount.name|default:'Нет' }}</p>
+    <p><strong>Дата добавления:</strong> {{ product.created_at }}</p>
+</div>
+<a href="{% url 'product_list_view' %}" class="back-link">Вернуться к списку</a> | <a href="{% url 'admin_panel_view' %}" class="back-link">В панель администратора</a>
+{% endblock %}
